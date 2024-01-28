@@ -1,9 +1,8 @@
-import math
+
 import numpy as np
 import matplotlib.pyplot as plt
 from sympy import *
-from sympy.abc import x, s
-from math import *
+
 
 # input intervals from terminal or in code
 # a = int(input())
@@ -23,7 +22,7 @@ print(f"{dx} is delta")
 print("input function")
 # input expression from terminal or in code
 # s = input()
-s = "sin(pi * x) * ln(x)"
+s = "log(x) * cos(x) * pi *pi"
 print(f"{s}")
 func = []
 x_val = np.linspace(a1, b)
@@ -55,22 +54,29 @@ for i, e in enumerate(func):
         sum2 += 2 * e
         d = False
 # print Simpson
-S = (dx / 3) * (sum2)
+S = (dx / 3) * sum2
 x = {'x': Symbol('x', real=True)}
 y = parse_expr(s, x)
 
 # making a graphic
 
-x_val = np.linspace(a, b, 100)
+x_val = np.linspace(a1, b, 100)
 y_val = [eval(s.replace("x", str(val))) for val in x_val]
 plt.plot(x_val, y_val)
+
 # Plotting trapezoids
 for i in range(n):
+
     x_trap = [a1 + i * dx, a1 + (i + 1) * dx, a1 + (i + 1) * dx, a1 + i * dx, a1 + i * dx]
     y_trap = [0, 0, eval(s.replace("x", str(a1 + (i + 1) * dx))), eval(s.replace("x", str(a1 + i * dx))), 0]
+    print(x_trap, y_trap)
     plt.plot(x_trap, y_trap, 'r--')
+plt.legend()
+plt.title("Function and Trapezoids")
+plt.xlabel("x")
+plt.ylabel("y")
 plt.show()
-#print(som)
+# print som
 print(f"By Simpson's Rule S = {S}")
 m = diff(y, *2 * [x['x']])  # m that is in E
 # plt.show()
