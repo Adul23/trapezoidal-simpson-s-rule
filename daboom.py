@@ -20,16 +20,19 @@ print(f"{dx} is delta")
 print("input function")
 # input expression from terminal or in code
 # s = input()
-s = "atan(x)"
+s = "np.e ** x"
+
+
 print(f"{s}")
 func = []
 x_val = np.linspace(a1, b)
 y_val = [eval(s.replace('x', str(val))) for val in x_val]
 plt.plot(x_val, y_val)
+plt.savefig('da')
 sum1 = 0
 while a <= b:
-
     w = s.replace("x", str(a))
+    print(w)
     try:
         result = eval(w)
         func.append(eval(w))
@@ -41,6 +44,7 @@ for i, e in enumerate(func):
         sum1 += e
     else:
         sum1 += 2 * e
+
 # print Trapezoidal
 T = (dx / 2) * (sum1)
 
@@ -49,24 +53,26 @@ sum2 = 0
 d = False
 for i, e in enumerate(func):
     if i == 0 or i == len(func) - 1:
-        sum2 += e
+        sum2 += eval(str(e))
     elif d is False:
-        sum2 += 4 * e
+        sum2 += 4 * eval(str(e))
         d = True
     elif d is True:
-        sum2 += 2 * e
+        sum2 += 2 * eval(str(e))
         d = False
+
 # print Simpson
 S = (dx / 3) * sum2
 x = {'x': Symbol('x', real=True)}
-y = parse_expr(s, x)
+q = s.replace('np.', '')
+y = parse_expr(q, x)
 
 # making a graphic
 
 x_val = np.linspace(a1, b, 100)
 y_val = [eval(s.replace("x", str(val))) for val in x_val]
 plt.plot(x_val, y_val)
-
+plt.savefig('da2')
 # Plotting trapezoids
 for i in range(n):
     x_trap = [a1 + i * dx, a1 + (i + 1) * dx, a1 + (i + 1) * dx, a1 + i * dx, a1 + i * dx]
@@ -82,6 +88,7 @@ plt.legend()
 plt.title("Function and Trapezoids")
 plt.xlabel("x")
 plt.ylabel("y")
+
 plt.show()
 # print som
 print(f"By Simpson's Rule S = {S}")
