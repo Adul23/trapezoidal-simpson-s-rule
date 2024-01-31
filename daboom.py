@@ -5,13 +5,13 @@ from sympy import *
 # input intervals from terminal or in code
 # a = int(input())
 # b = int(input())
-a = -5
+a = -6
 a1 = a
-b = 5
+b = 6
 print(f"input intervals [{a}, {b}]")
 # input N from terminal or in code
 # n = int(input())
-n = 50
+n = 100
 
 print(f"input N = {n}")
 # find delta x
@@ -20,7 +20,15 @@ print(f"{dx} is delta")
 print("input function")
 # input expression from terminal or in code
 # s = input()
-s = "np.e ** x"
+s = "sin(e ** x)"
+s = s.replace('sin', 'np.sin')
+# s = s.replace('e', 'np.e')
+s = s.replace('cos', 'np.cos')
+s = s.replace('tan', 'np.tan')
+s = s.replace('cot', '1 / np.tan')
+s = s.replace('e', 'np.e')
+s = s.replace('atan', 'np.atan')
+s = s.replace('pi', 'np.pi')
 
 
 print(f"{s}")
@@ -68,19 +76,20 @@ q = s.replace('np.', '')
 y = parse_expr(q, x)
 
 # making a graphic
-
+s = s.replace('np.sin', 'sin')
+s = s.replace('np.pi', 'pi')
 x_val = np.linspace(a1, b, 100)
 y_val = [eval(s.replace("x", str(val))) for val in x_val]
-plt.plot(x_val, y_val)
-plt.savefig('da2')
+# Plotting trapezoids
+# Plotting the function
+plt.plot(x_val, y_val, label='Function')
+
 # Plotting trapezoids
 for i in range(n):
     x_trap = [a1 + i * dx, a1 + (i + 1) * dx, a1 + (i + 1) * dx, a1 + i * dx, a1 + i * dx]
     try:
-        w = eval(s.replace("x", str(a1 + (i + 1) * dx)))
-        c = eval(s.replace("x", str(a1 + i * dx)))
         y_trap = [0, 0, eval(s.replace("x", str(a1 + (i + 1) * dx))), eval(s.replace("x", str(a1 + i * dx))), 0]
-        plt.plot(x_trap, y_trap, 'r--')
+        plt.plot(x_trap, y_trap, 'r-', alpha=0.5)  # Use 'r-' for solid red lines
     except ZeroDivisionError:
         print("Error: Division by zero")
 
@@ -90,6 +99,8 @@ plt.xlabel("x")
 plt.ylabel("y")
 
 plt.show()
+
+
 # print som
 print(f"By Simpson's Rule S = {S}")
 m = diff(y, *2 * [x['x']])  # m that is in E
