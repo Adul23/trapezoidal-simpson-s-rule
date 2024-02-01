@@ -1,18 +1,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sympy import *
-
+init_printing(use_unicode=False, wrap_line=False)
 # input intervals from terminal or in code
 # a = int(input())
 # b = int(input())
-a = 1
+a = -1
 a1 = a
 b = 10
 jab = a
 print(f"input intervals [{a}, {b}]")
 # input N from terminal or in code
 # n = int(input())
-n = 8
+n = 13
 
 print(f"input N = {n}")
 # find delta x
@@ -21,7 +21,7 @@ print(f"{dx} is delta")
 print("input function")
 # input expression from terminal or in code
 # s = input()
-s = "e ** x"
+s = "x * e"
 s = s.replace('sin', 'np.sin')
 # s = s.replace('e', 'np.e')
 s = s.replace('cos', 'np.cos')
@@ -30,7 +30,6 @@ s = s.replace('cot', '1 / np.tan')
 s = s.replace('e', 'np.e')
 s = s.replace('atan', 'np.atan')
 s = s.replace('pi', 'np.pi')
-
 
 print(f"{s}")
 func = []
@@ -75,7 +74,7 @@ S = (dx / 3) * sum2
 x = {'x': Symbol('x', real=True)}
 q = s.replace('np.', '')
 y = parse_expr(q, x)
-
+print(y)
 # making a graphic
 s = s.replace('np.sin', 'sin')
 s = s.replace('np.pi', 'pi')
@@ -100,7 +99,6 @@ plt.xlabel("x")
 plt.ylabel("y")
 
 plt.show()
-
 
 # print som
 print(f"By Simpson's Rule S = {S}")
@@ -140,8 +138,13 @@ while a <= b:
     a += dx
 m2 = (max(res1))
 Es = m2 * ((b - a1) ** 5) / (180 * (n ** 4))
-c1 = integrate(y, x['x'])
+print(y)
+c1 = integrate(str(y), Symbol('x'))
 string1 = str(c1)
+print(string1)
+
+string12 = string1.replace('cos', f'np.cos')
+string2 = string1.replace('cos', f'np.cos')
 string12 = string1.replace('x', f'{jab}')
 string2 = string1.replace('x', f'{b}')
 print(f"Error estimation of Simpson's law is {Es}")
