@@ -5,13 +5,14 @@ from sympy import *
 # input intervals from terminal or in code
 # a = int(input())
 # b = int(input())
-a = -6
+a = 1
 a1 = a
-b = 6
+b = 10
+jab = a
 print(f"input intervals [{a}, {b}]")
 # input N from terminal or in code
 # n = int(input())
-n = 100
+n = 8
 
 print(f"input N = {n}")
 # find delta x
@@ -20,7 +21,7 @@ print(f"{dx} is delta")
 print("input function")
 # input expression from terminal or in code
 # s = input()
-s = "sin(e ** x)"
+s = "e ** x"
 s = s.replace('sin', 'np.sin')
 # s = s.replace('e', 'np.e')
 s = s.replace('cos', 'np.cos')
@@ -139,4 +140,10 @@ while a <= b:
     a += dx
 m2 = (max(res1))
 Es = m2 * ((b - a1) ** 5) / (180 * (n ** 4))
+c1 = integrate(y, x['x'])
+string1 = str(c1)
+string12 = string1.replace('x', f'{jab}')
+string2 = string1.replace('x', f'{b}')
 print(f"Error estimation of Simpson's law is {Es}")
+print("Integral:")
+print(eval(string2) - eval(string12))
