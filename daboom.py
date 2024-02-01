@@ -13,7 +13,7 @@ jab = a
 print(f"input intervals [{a}, {b}]")
 # input N from terminal or in code
 # n = int(input())
-n = 20
+n = 10
 
 print(f"input N = {n}")
 # find delta x
@@ -22,7 +22,7 @@ print(f"{dx} is delta")
 print("input function")
 # input expression from terminal or in code
 # s = input()
-s = "sin(x * pi)"
+s = "(e ** x)"
 why = s
 s = s.replace('sin', 'np.sin')
 # s = s.replace('e', 'np.e')
@@ -83,13 +83,13 @@ s = s.replace('np.tan', 'tan')
 x_val = np.linspace(a1, b)
 y_val = []
 for val in x_val:
-    w = s.replace("x", str(a))
+    w = s.replace("x", str(val))
     try:
         y_val.append(eval(w))
     except ZeroDivisionError:
         print("Error: Division by zero")
-
-plt.plot(x_val, y_val, label=f'{why}', color='black')
+print(y_val)
+plt.plot(x_val, y_val, label=f'{why}')
 
 # Plotting trapezoids
 for i in range(n):
@@ -104,7 +104,7 @@ plt.legend()
 plt.title("Function and Trapezoids")
 plt.xlabel("x")
 plt.ylabel("y")
-
+plt.savefig('dada')
 plt.show()
 # Error T
 m = diff(y, *2 * [x['x']])  # second derivative
